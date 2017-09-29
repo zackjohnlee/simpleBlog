@@ -23,7 +23,10 @@ const Post = props =>{
 }
 
 Post.propTypes = {
-	postBody: PropTypes.string
+	postTitle: PropTypes.string,
+	postBody: PropTypes.string,
+	postAuthor: PropTypes.string,
+	dateCreated: PropTypes.string
 }
 
 export default Post;

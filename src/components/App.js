@@ -15,6 +15,7 @@ class App extends Component {
 	}
 	componentDidMount() {
 		this.gatherPosts();
+		//setInterval(this.gatherPosts, 2000);
 	}
 
 	handleChange(value){
@@ -24,20 +25,27 @@ class App extends Component {
 		}))
 	}
 
-	handleSubmitPost = e =>{
+	handleSubmitPost = e => {
 		e.preventDefault();
+		axios.post('http://localhost:3100/api/posts', {
+			title: e.target.title.value,
+			text: this.state.pendingPost,
+			author: e.target.author.value || "Anonymous"
+		})
+			.then(response => {
+				console.log(response)
+			})
+			.catch(error => {
+        		console.log('Error posting form', error);
+      		});
+
 		return(
+			e.target.title.value = '',
+			e.target.author.value = '',
 			this.setState(prevState => ({
-				posts: [
-					{
-						body: this.state.pendingPost,
-						id: this.state.nextKey
-					},
-					...prevState.posts
-				],
-				pendingPost: '',
-				nextKey: this.state.nextKey + 1
-			}))
+				pendingPost: ''
+			})),
+			this.gatherPosts()
 		);
 	}
 
