@@ -6,8 +6,11 @@ import Post from './Post'
 const BlogTimeline = props => {
 	let postTimeline = props.posts.map((post) => {
 		return <Post
-					key={post.id}
-					postBody={post.body} />
+					key={post['_id']}
+					postTitle={post.title}
+					postBody={post.text}
+					postAuthor={post.author}
+					dateCreated={post.createdAt} />
 	});
 	return(
 		<div>

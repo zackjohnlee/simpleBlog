@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import ReactQuill from 'react-quill';
 
 const TextField = props =>
-		<form onSubmit={props.newPost}>
+		<form onSubmit={props.submitPost} action="/api/posts" method="POST">
+			<input type="text" name="title" placeholder="Entry Title..."/>
 			<ReactQuill 
 				value={props.textField} 
 				onChange={props.handleChange}/>
@@ -13,7 +14,7 @@ const TextField = props =>
 TextField.propTypes = {
 	textField: PropTypes.string.isRequired,
 	handleChange: PropTypes.func.isRequired,
-	newPost: PropTypes.func.isRequired
+	submitPost: PropTypes.func.isRequired
 }
 
 export default TextField;

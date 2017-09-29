@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import TextField from './TextField';
 import BlogTimeline from './BlogTimeline';
 
@@ -10,16 +11,20 @@ class App extends Component {
 			pendingPost: "",
 			posts: []
 		}
-		this.handleChange = this.handleChange.bind(this)
+		this.handleChange = this.handleChange.bind(this);
+	}
+	componentDidMount() {
+		this.gatherPosts();
 	}
 
 	handleChange(value){
+		console.log(value);
 		this.setState(prevState => ({
 			pendingPost: value
 		}))
 	}
 
-	handleNewPost = e =>{
+	handleSubmitPost = e =>{
 		e.preventDefault();
 		return(
 			this.setState(prevState => ({
@@ -36,12 +41,25 @@ class App extends Component {
 		);
 	}
 
+	gatherPosts = () => {
+		axios.get('http://localhost:3100/api/posts')
+			.then(response => {
+				console.log(response);
+				this.setState({
+					posts: response.data
+				});
+			})
+			.catch(error => {
+        		console.log('Error fetching and parsing data', error);
+      		});
+	}
+
 	render() {
 		return (
 			<div>
 				<BlogTimeline posts={this.state.posts}/>
 	    		<TextField 
-	    			newPost = {this.handleNewPost}
+	    			submitPost = {this.handleSubmitPost}
 		      		textField={this.state.pendingPost}
 		      		handleChange={this.handleChange}
 		      />
