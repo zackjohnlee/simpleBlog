@@ -1,0 +1,19 @@
+body {
+  font-family: sans-serif; }
+
+.timeline-container {
+  width: 70%;
+  margin: 0 auto; }
+  .timeline-container .post-container .post-body {
+    width: 100%;
+    white-space: normal;
+    margin: 0 0 0 20px; }
+
+.post-form {
+  width: 70%;
+  height: 200px;
+  margin: 20px auto; }
+  .post-form .text-area {
+    min-height: 200px; }
+
+/*# sourceMappingURL=index.css.map */

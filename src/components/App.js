@@ -3,6 +3,7 @@ import axios from 'axios';
 import TextField from './TextField';
 import BlogTimeline from './BlogTimeline';
 
+
 class App extends Component {
 	constructor(props){
 		super(props)
@@ -15,11 +16,9 @@ class App extends Component {
 	}
 	componentDidMount() {
 		this.gatherPosts();
-		//setInterval(this.gatherPosts, 2000);
 	}
 
 	handleChange(value){
-		console.log(value);
 		this.setState(prevState => ({
 			pendingPost: value
 		}))
@@ -27,13 +26,14 @@ class App extends Component {
 
 	handleSubmitPost = e => {
 		e.preventDefault();
-		axios.post('http://localhost:3100/api/posts', {
+
+		axios.post('http://192.168.1.3:3100/api/posts', {
 			title: e.target.title.value,
 			text: this.state.pendingPost,
 			author: e.target.author.value || "Anonymous"
-		})
+			})
 			.then(response => {
-				console.log(response)
+				this.gatherPosts();
 			})
 			.catch(error => {
         		console.log('Error posting form', error);
@@ -44,15 +44,14 @@ class App extends Component {
 			e.target.author.value = '',
 			this.setState(prevState => ({
 				pendingPost: ''
-			})),
-			this.gatherPosts()
+			}))
 		);
 	}
 
 	gatherPosts = () => {
-		axios.get('http://localhost:3100/api/posts')
+		axios.get('http://192.168.1.3:3100/api/posts')
 			.then(response => {
-				console.log(response);
+				console.log(response)
 				this.setState({
 					posts: response.data
 				});

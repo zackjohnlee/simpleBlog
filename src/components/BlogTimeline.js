@@ -13,7 +13,7 @@ const BlogTimeline = props => {
 					dateCreated={post.createdAt} />
 	});
 	return(
-		<div>
+		<div className="timeline-container">
 			{postTimeline}
 		</div>
 	);

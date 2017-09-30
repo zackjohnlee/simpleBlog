@@ -65,12 +65,14 @@ router.get('/', function(req, res) {
 
 //GET array of posts from database
 router.get('/posts', function(req, res, next){
-	Post.find(function(err, posts){
-		if (err){
-			return next(err);
-		}
-		res.json(posts);
-	});
+	Post.find({})
+		.sort({createdAt: -1})
+		.exec(function(err, posts){
+			if (err){
+				return next(err);
+			}
+			res.json(posts);
+		});
 });
 
 //POST a blog bost to database

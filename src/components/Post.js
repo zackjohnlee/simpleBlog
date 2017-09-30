@@ -13,10 +13,10 @@ const Post = props =>{
 	const postDate = `${month}/${day}/${year}`;
 
 	return(
-		<div>
+		<div className="post-container">
 			<h1>{props.postTitle}</h1>
 			<p>{postDate}</p>
-			{ReactHtmlParser(props.postBody)}
+			<div className="post-body">{ReactHtmlParser(props.postBody)}</div>
 			<p>{props.postAuthor}</p>
 		</div>
 		);
