@@ -49,7 +49,7 @@ body {
         display: none; }
   .timeline-container .post-container .post-divider {
     width: 80%;
-    height: 1.3px;
+    height: 1px;
     margin: 50px auto;
     background: linear-gradient(to right, white 0%, #4f4f4f 21%, #4f4f4f 77%, white 100%); }
   @media (min-width: 500px) {

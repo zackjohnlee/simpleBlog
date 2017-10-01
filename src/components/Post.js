@@ -11,9 +11,12 @@ const Post = props =>{
 	const year = utcDate.getFullYear();
 	const month = utcDate.getMonth() + 1;
 	const postDate = `${month}/${day}/${year}`;
+
+	let bodyDiv = ReactHtmlParser(props.postBody);
 	let collapseTag
 
-	if(props.postBody.length < 500){
+	//bodyDiv gives a list of DOM nodes, while postBody.length is the list of characters
+	if(bodyDiv.length <= 2 && props.postBody.length < 500){
 		collapseTag = {
 			display: 'none'
 		};
@@ -30,7 +33,7 @@ const Post = props =>{
 				<p>{postDate}</p>
 			</div>
 			<p className="author"><span className="author-tag"> created by: </span> {props.postAuthor}</p>
-			<div style={styles}className="post-body">{ReactHtmlParser(props.postBody)}</div>
+			<div style={styles} className="post-body">{bodyDiv}</div>
 
 			<div className="collapse" style={collapseTag}>
 				<label className="expander">
