@@ -53,8 +53,8 @@ class App extends Component {
 		);
 	}
 
-	gatherPosts = () => {
-		axios.get('http://192.168.1.3:3100/api/posts')
+	gatherPosts = (page = '0') => {
+		axios.get(`http://192.168.1.3:3100/api/posts/${page}`)
 			.then(response => {
 				console.log(response);
 				this.setState({
@@ -91,9 +91,9 @@ class App extends Component {
 	    			submitPost = {this.handleSubmitPost}
 		      		textField={this.state.pendingPost}
 		      		handleChange={this.handleChange}
-		      />
-	      </div>
-	   );
+		      	/>
+	    	</div>
+	   	);
   	}
 }
 

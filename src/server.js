@@ -64,8 +64,10 @@ router.get('/', function(req, res) {
 });
 
 //GET array of posts from database
-router.get('/posts', function(req, res, next){
+router.get('/posts/:page', function(req, res, next){
 	Post.find({})
+		.skip(req.params.page*3)
+		.limit(3)
 		.sort({createdAt: -1})
 		.exec(function(err, posts){
 			if (err){

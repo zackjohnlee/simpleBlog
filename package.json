@@ -26,5 +26,6 @@
   },
   "devDependencies": {
     "foreman": "^2.0.0"
-  }
+  },
+  "proxy": "http://localhost:3100/"
 }

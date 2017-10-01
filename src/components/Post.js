@@ -23,7 +23,7 @@ const Post = props =>{
 	}
 
 	const styles = {
-		height: props.isExpanded ? 'initial' : `100px`
+		height: props.isExpanded ? 'initial' : `75px`
 	};
 
 	return(
