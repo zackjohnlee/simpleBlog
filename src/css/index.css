@@ -2,18 +2,64 @@ body {
   font-family: sans-serif; }
 
 .timeline-container {
-  width: 70%;
+  width: 90%;
   margin: 0 auto; }
+  .timeline-container .post-container .post-header {
+    height: 60px; }
+    .timeline-container .post-container .post-header h1 {
+      font-size: 1.8rem;
+      font-weight: 200;
+      margin: 20px 0 0;
+      display: inline-block; }
+    .timeline-container .post-container .post-header p {
+      margin: 40px 0;
+      font-size: 0.8rem;
+      float: right;
+      display: inline-block; }
+  .timeline-container .post-container .author {
+    font-size: 0.9rem;
+    margin: 0 0 20px; }
+    .timeline-container .post-container .author .author-tag {
+      font-size: 0.4rem;
+      margin: 0 5px; }
   .timeline-container .post-container .post-body {
     width: 100%;
     white-space: normal;
     margin: 0 0 0 20px; }
+    .timeline-container .post-container .post-body p {
+      line-height: 130%;
+      margin: 0; }
+  .timeline-container .post-container .post-divider {
+    width: 80%;
+    height: 1.3px;
+    margin: 50px auto;
+    background: linear-gradient(to right, white 0%, #4f4f4f 21%, #4f4f4f 77%, white 100%); }
+  @media (min-width: 500px) {
+    .timeline-container {
+      width: 80%; } }
 
 .post-form {
-  width: 70%;
+  width: 90%;
   height: 200px;
   margin: 20px auto; }
-  .post-form .text-area {
-    min-height: 200px; }
+  .post-form form {
+    width: 100%;
+    margin: 0 auto; }
+  .post-form input {
+    height: 30px;
+    margin: 10px 0;
+    width: 100%;
+    font-size: 20px; }
+    @media (min-width: 500px) {
+      .post-form input {
+        width: 50%; } }
+    .post-form input:first-child {
+      margin: 10px 0 0;
+      width: 100%; }
+  .post-form .quill {
+    width: 100%;
+    margin: 0 auto; }
+    .post-form .quill .text-area {
+      min-height: 200px; }
 
 /*# sourceMappingURL=index.css.map */

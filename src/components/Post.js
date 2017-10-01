@@ -14,10 +14,13 @@ const Post = props =>{
 
 	return(
 		<div className="post-container">
-			<h1>{props.postTitle}</h1>
-			<p>{postDate}</p>
+			<div className="post-header">
+				<h1>{props.postTitle}</h1>
+				<p>{postDate}</p>
+			</div>
+			<p className="author"><span className="author-tag"> created by: </span> {props.postAuthor}</p>
 			<div className="post-body">{ReactHtmlParser(props.postBody)}</div>
-			<p>{props.postAuthor}</p>
+			<div className="post-divider"/>
 		</div>
 		);
 }

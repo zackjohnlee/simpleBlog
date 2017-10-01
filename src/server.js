@@ -83,7 +83,7 @@ router.post('/posts',function(req, res){
 	post.author = req.body.author;
 	post.save(function(err){
 		if (err) res.send(err);
-		res.json({message: 'post successfully added'});
+		res.json(post);
 	});
 });
 

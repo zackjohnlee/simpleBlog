@@ -1,24 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactQuill from 'react-quill';
-
+import 'react-quill/dist/quill.snow.css';
 
 const TextField = props => {
 	
 	const modules = {
     	toolbar: [
-      		['bold', 'italic', 'underline','strike', 'blockquote'],
+    		[{'font': [] }],
+    		[{ 'size': ['small', false, 'large'] }],
+      		['bold', 'italic', 'underline','strike'],
+      		['code', 'blockquote'],
+      		[{'background': []}, {'color': [] }],
       		[{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      		['link', 'image'],
+      		[{'align': [] }, 'code-block'],
+      		['link'],
       		['clean']
     	]
   	};
 
   	const formats = [
     	'header',
+    	'font', 'size',
     	'bold', 'italic', 'underline', 'strike', 'blockquote',
+    	'code', 'blockquote',
+    	'background', 'color',
     	'list', 'bullet', 'indent',
-    	'link', 'image'
+    	'align', 'direction', 'code-block',
+    	'link'
   	];
 
 	return(

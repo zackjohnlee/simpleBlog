@@ -24,9 +24,12 @@ class App extends Component {
 		}))
 	}
 
-	handleSubmitPost = e => {
+	handleSubmitPost = (e) => {
 		e.preventDefault();
-
+		var postArray = this.state.posts.filter(post => post.title = "Untitled").length;
+		if(e.target.title.value === ""){
+			e.target.title.value = `Untitled ${postArray + 1}`;
+		}
 		axios.post('http://192.168.1.3:3100/api/posts', {
 			title: e.target.title.value,
 			text: this.state.pendingPost,
@@ -51,7 +54,7 @@ class App extends Component {
 	gatherPosts = () => {
 		axios.get('http://192.168.1.3:3100/api/posts')
 			.then(response => {
-				console.log(response)
+				console.log(response);
 				this.setState({
 					posts: response.data
 				});
