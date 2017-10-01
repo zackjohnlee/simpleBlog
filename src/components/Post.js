@@ -12,6 +12,8 @@ const Post = props =>{
 	const month = utcDate.getMonth() + 1;
 	const postDate = `${month}/${day}/${year}`;
 
+	const styles = {height: props.isExpanded ? 'initial' : `100px`};
+	
 	return(
 		<div className="post-container">
 			<div className="post-header">
@@ -19,7 +21,15 @@ const Post = props =>{
 				<p>{postDate}</p>
 			</div>
 			<p className="author"><span className="author-tag"> created by: </span> {props.postAuthor}</p>
-			<div className="post-body">{ReactHtmlParser(props.postBody)}</div>
+			<div style={styles}className="post-body">{ReactHtmlParser(props.postBody)}</div>
+
+			<label className="expander">...more
+			  <input 
+			  	type="checkbox" 
+			  	checked={props.isExpanded}
+			  	onChange={props.handleExpansion}/>
+			</label>
+
 			<div className="post-divider"/>
 		</div>
 		);

@@ -10,7 +10,9 @@ const BlogTimeline = props => {
 					postTitle={post.title}
 					postBody={post.text}
 					postAuthor={post.author}
-					dateCreated={post.createdAt} />
+					dateCreated={post.createdAt}
+					isExpanded={post.expand}
+					handleExpansion={() => props.expansionHandler(post['_id'])}/>
 	});
 	return(
 		<div className="timeline-container">

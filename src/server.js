@@ -81,6 +81,7 @@ router.post('/posts',function(req, res){
 	post.title = req.body.title;
 	post.text = req.body.text;
 	post.author = req.body.author;
+	post.expand = false;
 	post.save(function(err){
 		if (err) res.send(err);
 		res.json(post);

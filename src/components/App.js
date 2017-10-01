@@ -12,6 +12,7 @@ class App extends Component {
 			pendingPost: "",
 			posts: []
 		}
+
 		this.handleChange = this.handleChange.bind(this);
 	}
 	componentDidMount() {
@@ -33,7 +34,8 @@ class App extends Component {
 		axios.post('http://192.168.1.3:3100/api/posts', {
 			title: e.target.title.value,
 			text: this.state.pendingPost,
-			author: e.target.author.value || "Anonymous"
+			author: e.target.author.value || "Anonymous",
+			expand: false
 			})
 			.then(response => {
 				this.gatherPosts();
@@ -64,10 +66,27 @@ class App extends Component {
       		});
 	}
 
+	toggleExpansion = (id) => {
+		this.setState({
+      		posts: this.state.posts.map(post => {
+		        if(id === post['_id']){
+		          return{
+		            ...post,
+		            expand: !post.expand
+		          };
+		        }
+		        return post;
+		    })
+		});
+	}
+
 	render() {
 		return (
 			<div>
-				<BlogTimeline posts={this.state.posts}/>
+				<BlogTimeline 
+					posts={this.state.posts}
+					expansionHandler={this.toggleExpansion}
+				/>
 	    		<TextField 
 	    			submitPost = {this.handleSubmitPost}
 		      		textField={this.state.pendingPost}

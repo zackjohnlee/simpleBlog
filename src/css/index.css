@@ -25,7 +25,9 @@ body {
   .timeline-container .post-container .post-body {
     width: 100%;
     white-space: normal;
-    margin: 0 0 0 20px; }
+    overflow: hidden;
+    margin: 0 0 0 20px;
+    background: white; }
     .timeline-container .post-container .post-body p {
       line-height: 130%;
       margin: 0; }

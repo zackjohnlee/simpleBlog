@@ -9,7 +9,8 @@ var PostSchema = new Schema({
 	title: String,
 	text: String,
 	author: String,
-	createdAt: {type: Date, default: Date.now}
+	createdAt: {type: Date, default: Date.now},
+	expand: Boolean
 });
 
 
