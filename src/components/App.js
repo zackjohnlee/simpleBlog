@@ -70,10 +70,11 @@ class App extends Component {
 		this.setState({
       		posts: this.state.posts.map(post => {
 		        if(id === post['_id']){
-		          return{
-		            ...post,
-		            expand: !post.expand
-		          };
+		        	console.log(post['_id'])
+		          	return{
+			            ...post,
+			            expand: !post.expand
+			        };
 		        }
 		        return post;
 		    })

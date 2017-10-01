@@ -39,8 +39,31 @@ body{
 			p{
 				line-height: 130%;
 				margin: 0;
+				.ql-size-large{
+					font-size: 1.3rem;
+				}
+				.ql-font-serif{
+					font-family: Serif;
+				}
+			}
+			.ql-indent-1{
+				margin-left: 30px;
 			}
 		}
+		.collapse{
+			margin: 10px 0;
+			height: 20px;
+			.expander{
+				float: right;
+				margin: 30px 20px;
+				cursor: pointer;
+				color: red;	
+				#check{
+					display: none;
+				}
+			}
+		}
+
 		.post-divider{
 			width: 80%;
 			height: 1.3px;

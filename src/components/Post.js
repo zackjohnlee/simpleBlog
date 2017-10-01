@@ -11,9 +11,18 @@ const Post = props =>{
 	const year = utcDate.getFullYear();
 	const month = utcDate.getMonth() + 1;
 	const postDate = `${month}/${day}/${year}`;
+	let collapseTag
 
-	const styles = {height: props.isExpanded ? 'initial' : `100px`};
-	
+	if(props.postBody.length < 500){
+		collapseTag = {
+			display: 'none'
+		};
+	}
+
+	const styles = {
+		height: props.isExpanded ? 'initial' : `100px`
+	};
+
 	return(
 		<div className="post-container">
 			<div className="post-header">
@@ -23,16 +32,21 @@ const Post = props =>{
 			<p className="author"><span className="author-tag"> created by: </span> {props.postAuthor}</p>
 			<div style={styles}className="post-body">{ReactHtmlParser(props.postBody)}</div>
 
-			<label className="expander">...more
-			  <input 
-			  	type="checkbox" 
-			  	checked={props.isExpanded}
-			  	onChange={props.handleExpansion}/>
-			</label>
+			<div className="collapse" style={collapseTag}>
+				<label className="expander">
+					{props.isExpanded ? 'less...' : '...more'}
+					<input 
+					  	id="check"
+					  	type="checkbox" 
+					  	checked={props.isExpanded}
+					  	onChange={props.handleExpansion}/>
+				</label>
+		  	</div>	
+			
 
 			<div className="post-divider"/>
 		</div>
-		);
+	);
 }
 
 Post.propTypes = {

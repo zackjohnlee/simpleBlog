@@ -31,6 +31,22 @@ body {
     .timeline-container .post-container .post-body p {
       line-height: 130%;
       margin: 0; }
+      .timeline-container .post-container .post-body p .ql-size-large {
+        font-size: 1.3rem; }
+      .timeline-container .post-container .post-body p .ql-font-serif {
+        font-family: Serif; }
+    .timeline-container .post-container .post-body .ql-indent-1 {
+      margin-left: 30px; }
+  .timeline-container .post-container .collapse {
+    margin: 10px 0;
+    height: 20px; }
+    .timeline-container .post-container .collapse .expander {
+      float: right;
+      margin: 30px 20px;
+      cursor: pointer;
+      color: red; }
+      .timeline-container .post-container .collapse .expander #check {
+        display: none; }
   .timeline-container .post-container .post-divider {
     width: 80%;
     height: 1.3px;
