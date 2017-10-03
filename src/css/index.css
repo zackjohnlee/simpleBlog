@@ -60,6 +60,10 @@ body {
     .timeline-container {
       width: 80%; } }
 
+.page-nav {
+  width: 50px;
+  margin: 0 auto; }
+
 .post-form {
   width: 90%;
   height: 200px;
