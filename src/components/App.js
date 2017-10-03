@@ -8,7 +8,9 @@ import axios from 'axios';
 import TextField from './TextField';
 import List from './List';
 import Button from './Button';
+import createBrowserHistory from 'history/createBrowserHistory';
 
+const history = createBrowserHistory();
 
 class App extends Component {
 	constructor(props){
@@ -21,7 +23,10 @@ class App extends Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 	componentDidMount() {
-		this.gatherPosts();
+		const page = parseInt(history.location.pathname.slice(7),10);
+
+
+		this.gatherPosts(page);
 	}
 
 	handleChange(value){
@@ -32,9 +37,9 @@ class App extends Component {
 
 	handleSubmitPost = (e) => {
 		e.preventDefault();
-		var postArray = this.state.posts.filter(post => post.title = "Untitled").length;
+		var untitledVal = this.state.posts.filter(post => post.title = "Untitled").length;
 		if(e.target.title.value === ""){
-			e.target.title.value = `Untitled ${postArray + 1}`;
+			e.target.title.value = `Untitled ${untitledVal + 1}`;
 		}
 		axios.post('http://192.168.1.3:3100/api/posts', {
 			title: e.target.title.value,
@@ -93,10 +98,13 @@ class App extends Component {
 	}
 
 	pageSearch(dir) {
-		if (Math.ceil(this.state.totalPosts/3)<=this.state.page+1 && dir != -1){
+		if (Math.ceil(this.state.totalPosts/3)<=this.state.page+1 && dir !== -1){
+			return null;
+		}else if (this.state.page == 0 && dir == -1){
 			return null;
 		}else{
-			this.gatherPosts(parseInt(this.state.page) + dir);
+			this.gatherPosts(parseInt(this.state.page + dir, 10));
+			history.push(`/posts/${parseInt(this.state.page + dir, 10)}`);
 		}
 	}
 
