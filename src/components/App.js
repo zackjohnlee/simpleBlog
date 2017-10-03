@@ -23,10 +23,9 @@ class App extends Component {
 		this.handleChange = this.handleChange.bind(this);
 	}
 	componentDidMount() {
-		const page = parseInt(history.location.pathname.slice(7),10);
-
-
+		let page = parseInt(history.location.pathname.slice(1), 10);
 		this.gatherPosts(page);
+		
 	}
 
 	handleChange(value){
@@ -41,7 +40,7 @@ class App extends Component {
 		if(e.target.title.value === ""){
 			e.target.title.value = `Untitled ${untitledVal + 1}`;
 		}
-		axios.post('http://192.168.1.3:3100/api/posts', {
+		axios.post('http://localhost:3100/api/posts', {
 			title: e.target.title.value,
 			text: this.state.pendingPost,
 			author: e.target.author.value || "Anonymous",
@@ -64,7 +63,7 @@ class App extends Component {
 	}
 
 	gatherPosts = (page = '0') => {
-		axios.get(`http://192.168.1.3:3100/api/posts/${page}`)
+		axios.get(`http://localhost:3100/api/posts/${page}`)
 			.then(response => {
 				console.log(response);
 				this.setState({
@@ -75,7 +74,7 @@ class App extends Component {
 			.catch(error => {
         		console.log('Error fetching and parsing data', error);
       		});
-      	axios.get("http://192.168.1.3:3100/api/")
+      	axios.get("http://localhost:3100/api/")
       		.then(response => {
       			this.setState({
       				totalPosts: response.data
@@ -100,11 +99,12 @@ class App extends Component {
 	pageSearch(dir) {
 		if (Math.ceil(this.state.totalPosts/3)<=this.state.page+1 && dir !== -1){
 			return null;
-		}else if (this.state.page == 0 && dir == -1){
+		}else if (this.state.page === 0 && dir === -1){
 			return null;
 		}else{
-			this.gatherPosts(parseInt(this.state.page + dir, 10));
-			history.push(`/posts/${parseInt(this.state.page + dir, 10)}`);
+			let postUrl = parseInt(this.state.page + dir, 10)
+			this.gatherPosts(postUrl);
+			history.push(`/${postUrl}`);
 		}
 	}
 
@@ -113,7 +113,7 @@ class App extends Component {
 			<BrowserRouter>
 				<div>
 					<Route
-						path="/posts/:page"
+						path="/:page"
 						render={() =>
 							<List
 								name={"timeline"}
