@@ -59,8 +59,13 @@ router.param("blogID", function(req, res, next, id){
 	});
 });
 
-router.get('/', function(req, res) {
-	res.json({ message: 'API Initialized!'});
+router.get('/', function(req, res, next) {
+	Post.find({})
+		.count()
+		.exec(function(err, count){
+			if (err) return next(err);
+			res.json(count);
+		});
 });
 
 //GET array of posts from database
@@ -77,7 +82,7 @@ router.get('/posts/:page', function(req, res, next){
 		});
 });
 
-//POST a blog bost to database
+//POST a blog post to database
 router.post('/posts',function(req, res){
 	var post = new Post();
 	post.title = req.body.title;

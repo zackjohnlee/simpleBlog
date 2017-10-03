@@ -2,6 +2,7 @@
   "name": "blogposter",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3100",
   "dependencies": {
     "axios": "^0.16.2",
     "body-parser": "^1.18.2",
@@ -15,6 +16,7 @@
     "react-dom": "^15.6.2",
     "react-html-parser": "^2.0.0",
     "react-quill": "^1.1.0",
+    "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.13"
   },
   "scripts": {
@@ -26,6 +28,5 @@
   },
   "devDependencies": {
     "foreman": "^2.0.0"
-  },
-  "proxy": "http://localhost:3100/"
+  }
 }

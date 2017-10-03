@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import Post from './Post'
 
 
-const BlogTimeline = props => {
+const List = props => {
+
 	let classname = props.name + "-container";
-	let postTimeline = props.posts.map((post) => {
+
+	let listView = props.posts.map((post) => {
 		return <Post
 					key={post['_id']}
 					postTitle={post.title}
@@ -17,13 +19,13 @@ const BlogTimeline = props => {
 	});
 	return(
 		<div className={classname}>
-			{postTimeline}
+			{listView}
 		</div>
 	);
 }
 
-BlogTimeline.propTypes = {
+List.propTypes = {
 	posts: PropTypes.array
 }
 
-export default BlogTimeline;
+export default List;

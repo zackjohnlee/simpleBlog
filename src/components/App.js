@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
+import {
+   BrowserRouter,
+   Route,
+   Switch
+} from 'react-router-dom';
 import axios from 'axios';
 import TextField from './TextField';
-import BlogTimeline from './BlogTimeline';
+import List from './List';
+import Button from './Button';
 
 
 class App extends Component {
 	constructor(props){
 		super(props)
 		this.state={
-			nextKey: 1,
 			pendingPost: "",
 			posts: []
 		}
@@ -58,12 +63,19 @@ class App extends Component {
 			.then(response => {
 				console.log(response);
 				this.setState({
-					posts: response.data
+					posts: response.data,
+					page: page
 				});
 			})
 			.catch(error => {
         		console.log('Error fetching and parsing data', error);
       		});
+      	axios.get("http://192.168.1.3:3100/api/")
+      		.then(response => {
+      			this.setState({
+      				totalPosts: response.data
+      			})
+      		})
 	}
 
 	toggleExpansion = (id) => {
@@ -80,19 +92,45 @@ class App extends Component {
 		});
 	}
 
+	pageSearch(dir) {
+		if (Math.ceil(this.state.totalPosts/3)<=this.state.page+1 && dir != -1){
+			return null;
+		}else{
+			this.gatherPosts(parseInt(this.state.page) + dir);
+		}
+	}
+
 	render() {
 		return (
-			<div>
-				<BlogTimeline 
-					posts={this.state.posts}
-					expansionHandler={this.toggleExpansion}
-				/>
-	    		<TextField 
-	    			submitPost = {this.handleSubmitPost}
-		      		textField={this.state.pendingPost}
-		      		handleChange={this.handleChange}
-		      	/>
-	    	</div>
+			<BrowserRouter>
+				<div>
+					<Route
+						path="/posts/:page"
+						render={() =>
+							<List
+								name={"timeline"}
+								posts={this.state.posts}
+								expansionHandler={this.toggleExpansion}
+							/>
+						}
+					/>
+					<div className="page-nav">
+						<Button
+							handleClick={() => this.pageSearch(-1)}
+							symbol={"<"}
+						/>
+						<Button
+							handleClick={() => this.pageSearch(1)}
+							symbol={">"}
+						/>
+					</div>
+		    		<TextField 
+		    			submitPost = {this.handleSubmitPost}
+			      		textField={this.state.pendingPost}
+			      		handleChange={this.handleChange}
+			      	/>
+		    	</div>
+	    	</BrowserRouter>
 	   	);
   	}
 }
