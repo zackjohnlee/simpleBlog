@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
    BrowserRouter,
    Route,
+   Redirect,
    Switch
 } from 'react-router-dom';
 import axios from 'axios';
@@ -112,6 +113,7 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<div>
+					<Route exact to="/" render={() => <Redirect to="/0"/>}/>
 					<Route
 						path="/:page"
 						render={() =>
