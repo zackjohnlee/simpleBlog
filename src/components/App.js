@@ -17,7 +17,10 @@ class App extends Component {
 	constructor(props){
 		super(props)
 		this.state={
+			isOpen: false,
 			pendingPost: "",
+			totalPosts: 0,
+			totalUntitled: 0,
 			posts: []
 		}
 
@@ -25,6 +28,7 @@ class App extends Component {
 	}
 	componentDidMount() {
 		let page = parseInt(history.location.pathname.slice(1), 10);
+		this.gatherPostTotals();
 		this.gatherPosts(page);
 		
 	}
@@ -37,9 +41,11 @@ class App extends Component {
 
 	handleSubmitPost = (e) => {
 		e.preventDefault();
-		var untitledVal = this.state.posts.filter(post => post.title = "Untitled").length;
 		if(e.target.title.value === ""){
-			e.target.title.value = `Untitled ${untitledVal + 1}`;
+			e.target.title.value = `Untitled ${this.state.totalUntitled + 1}`;
+			this.setState({
+				totalUntitled: this.state.totalUntitled + 1
+			});
 		}
 		axios.post('http://localhost:3100/api/posts', {
 			title: e.target.title.value,
@@ -58,7 +64,8 @@ class App extends Component {
 			e.target.title.value = '',
 			e.target.author.value = '',
 			this.setState(prevState => ({
-				pendingPost: ''
+				pendingPost: '',
+				isOpen: false
 			}))
 		);
 	}
@@ -69,18 +76,23 @@ class App extends Component {
 				console.log(response);
 				this.setState({
 					posts: response.data,
-					page: page
+					page: page,
 				});
 			})
 			.catch(error => {
         		console.log('Error fetching and parsing data', error);
       		});
-      	axios.get("http://localhost:3100/api/")
+	}
+
+	gatherPostTotals = () => {
+		axios.get("http://localhost:3100/api/")
       		.then(response => {
+      			//console.log(response.data);
       			this.setState({
-      				totalPosts: response.data
-      			})
-      		})
+      				totalUntitled: response.data[0],
+      				totalPosts: response.data[1]
+      			});
+      		});
 	}
 
 	toggleExpansion = (id) => {
@@ -94,6 +106,12 @@ class App extends Component {
 		        }
 		        return post;
 		    })
+		});
+	}
+
+	toggleTextField = () => {
+		this.setState({
+			isOpen: !this.state.isOpen
 		});
 	}
 
@@ -135,7 +153,9 @@ class App extends Component {
 						/>
 					</div>
 		    		<TextField 
-		    			submitPost = {this.handleSubmitPost}
+		    			handleTextToggle={this.toggleTextField}
+		    			isOpen={this.state.isOpen}
+		    			submitPost={this.handleSubmitPost}
 			      		textField={this.state.pendingPost}
 			      		handleChange={this.handleChange}
 			      	/>

@@ -5,6 +5,7 @@ const Button = props => {
 
 	return(
 		<button
+			className={props.classname}
 			type="button"
 			onClick={props.handleClick}>
 			{props.symbol}

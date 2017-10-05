@@ -65,20 +65,35 @@ body {
   margin: 0 auto; }
 
 .post-form {
-  width: 90%;
-  height: 200px;
-  margin: 20px auto; }
+  position: relative;
+  margin: 0;
+  width: 100%; }
+  .post-form .text-toggle {
+    position: fixed;
+    right: 10%;
+    bottom: 20%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-family: inherit;
+    font-size: 1em;
+    cursor: pointer; }
   .post-form form {
-    width: 100%;
-    margin: 0 auto; }
+    position: fixed;
+    top: 10%;
+    width: 70%;
+    background: white;
+    margin: 0 auto;
+    z-index: 100; }
   .post-form input {
     height: 30px;
     margin: 10px 0;
-    width: 100%;
+    width: 99%;
     font-size: 20px; }
     @media (min-width: 500px) {
       .post-form input {
-        width: 50%; } }
+        width: 49%; } }
     .post-form input:first-child {
       margin: 10px 0 0;
       width: 100%; }

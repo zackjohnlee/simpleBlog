@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import Button from './Button';
 
 const TextField = props => {
 	
@@ -32,20 +33,26 @@ const TextField = props => {
 
 	return(
 		<div className="post-form">
-			<form onSubmit={props.submitPost}>
-				<input type="text" name="title" placeholder="Entry Title..."/>
-				<input type="text" name="author" placeholder="Author..."/>
-				<ReactQuill 
-					value={props.textField} 
-					onChange={props.handleChange}
-					modules={modules}
-					formats={formats}
-					theme="snow"
-					placeholder="Start your story...">
-					<div className="text-area"></div>
-				</ReactQuill>
-				<button type="submit" name="submit" value="submit">POST</button>
-			</form>
+			<Button 
+				classname="text-toggle"
+				symbol={props.isOpen ? "x" : "+"}
+				handleClick={props.handleTextToggle} />
+			{props.isOpen &&
+				<form onSubmit={props.submitPost}>
+					<input type="text" name="title" placeholder="Entry Title..."/>
+					<input type="text" name="author" placeholder="Author..."/>
+					<ReactQuill 
+						value={props.textField} 
+						onChange={props.handleChange}
+						modules={modules}
+						formats={formats}
+						theme="snow"
+						placeholder="Start your story...">
+						<div className="text-area"></div>
+					</ReactQuill>
+					<button type="submit" name="submit" value="submit">POST</button>
+				</form>
+			}
 		</div>
 	);
 };
