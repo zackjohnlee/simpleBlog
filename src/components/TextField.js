@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
 import Button from './Button';
 
 const TextField = props => {
@@ -37,22 +38,27 @@ const TextField = props => {
 				classname="text-toggle"
 				symbol={props.isOpen ? "x" : "+"}
 				handleClick={props.handleTextToggle} />
-			{props.isOpen &&
-				<form onSubmit={props.submitPost}>
-					<input type="text" name="title" placeholder="Entry Title..."/>
-					<input type="text" name="author" placeholder="Author..."/>
-					<ReactQuill 
-						value={props.textField} 
-						onChange={props.handleChange}
-						modules={modules}
-						formats={formats}
-						theme="snow"
-						placeholder="Start your story...">
-						<div className="text-area"></div>
-					</ReactQuill>
-					<button type="submit" name="submit" value="submit">POST</button>
-				</form>
-			}
+			<ReactCSSTransitionGroup
+				transitionName="slide"
+				transitionEnterTimeout={500}
+          		transitionLeaveTimeout={500}>
+				{props.isOpen &&
+					<form onSubmit={props.submitPost}>
+						<input type="text" name="title" placeholder="Entry Title..."/>
+						<input type="text" name="author" placeholder="Author..."/>
+						<ReactQuill 
+							value={props.textField} 
+							onChange={props.handleChange}
+							modules={modules}
+							formats={formats}
+							theme="snow"
+							placeholder="Start your story...">
+							<div className="text-area"></div>
+						</ReactQuill>
+						<button className="post-submit" type="submit" name="submit" value="submit">POST</button>
+					</form>
+				}
+			</ReactCSSTransitionGroup>
 		</div>
 	);
 };

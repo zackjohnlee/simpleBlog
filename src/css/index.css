@@ -2,6 +2,7 @@ body {
   font-family: sans-serif; }
 
 .timeline-container {
+  position: relative;
   width: 90%;
   margin: 0 auto; }
   .timeline-container .post-container .post-header {
@@ -61,13 +62,18 @@ body {
       width: 80%; } }
 
 .page-nav {
+  position: relative;
   width: 50px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  z-index: 10; }
 
 .post-form {
-  position: relative;
+  position: fixed;
+  top: 0;
+  right: 0;
   margin: 0;
-  width: 100%; }
+  width: 100%;
+  height: 100vh; }
   .post-form .text-toggle {
     position: fixed;
     right: 10%;
@@ -82,25 +88,48 @@ body {
   .post-form form {
     position: fixed;
     top: 10%;
-    width: 70%;
+    left: 12.5%;
+    width: 75%;
+    border-radius: 5px;
+    border: 1px solid rgba(100, 100, 100, 0.5);
     background: white;
+    box-shadow: 10px 10px 10px rgba(100, 100, 100, 0.5);
     margin: 0 auto;
+    padding: 20px 0;
     z-index: 100; }
-  .post-form input {
-    height: 30px;
-    margin: 10px 0;
-    width: 99%;
-    font-size: 20px; }
-    @media (min-width: 500px) {
-      .post-form input {
-        width: 49%; } }
-    .post-form input:first-child {
-      margin: 10px 0 0;
-      width: 100%; }
-  .post-form .quill {
-    width: 100%;
-    margin: 0 auto; }
-    .post-form .quill .text-area {
-      min-height: 200px; }
+    .post-form form input {
+      height: 30px;
+      width: 90%;
+      margin: 10px 5%;
+      padding: 0 0 0 10px;
+      font-size: 20px; }
+      @media (min-width: 500px) {
+        .post-form form input {
+          width: 50%; } }
+      .post-form form input:first-child {
+        margin: 10px 5% 0;
+        width: 90%; }
+    .post-form form .quill {
+      width: 90%;
+      margin: 0 auto; }
+      .post-form form .quill .text-area {
+        min-height: 200px; }
+    .post-form form .post-submit {
+      margin: 25px 0 10px 5%; }
+
+.slide-enter {
+  transform: translateY(100%);
+  opacity: 0; }
+  .slide-enter.slide-enter-active {
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 0.5s ease-out; }
+
+.slide-leave {
+  transform: translateY(0); }
+  .slide-leave.slide-leave-active {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: 0.5s ease-in; }
 
 /*# sourceMappingURL=index.css.map */

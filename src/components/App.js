@@ -121,6 +121,7 @@ class App extends Component {
 		}else if (this.state.page === 0 && dir === -1){
 			return null;
 		}else{
+			console.log("page turned");
 			let postUrl = parseInt(this.state.page + dir, 10)
 			this.gatherPosts(postUrl);
 			history.push(`/${postUrl}`);
@@ -144,10 +145,12 @@ class App extends Component {
 					/>
 					<div className="page-nav">
 						<Button
+							classname={"nav-button"}
 							handleClick={() => this.pageSearch(-1)}
 							symbol={"<"}
 						/>
 						<Button
+							classname={"nav-button"}
 							handleClick={() => this.pageSearch(1)}
 							symbol={">"}
 						/>
