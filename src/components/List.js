@@ -1,27 +1,48 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import Post from './Post'
+import TransitionGroupPlus from 'react-transition-group-plus';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'; 
+import Post from './Post';
+
+let pageTurn = "";
 
 
-const List = props => {
+class List extends Component {
 
-	let classname = props.name + "-container";
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.currentPage > this.props.currentPage){
+			pageTurn = "page-slide-right"
+		} else{
+			pageTurn = "page-slide-left"
+		}
+	}
 
-	let listView = props.posts.map((post) => {
-		return <Post
-					key={post['_id']}
-					postTitle={post.title}
-					postBody={post.text}
-					postAuthor={post.author}
-					dateCreated={post.createdAt}
-					isExpanded={post.expand}
-					handleExpansion={() => props.expansionHandler(post['_id'])}/>
-	});
-	return(
-		<div className={classname}>
-			{listView}
-		</div>
-	);
+	render(){
+		let classname = this.props.name + "-container";
+
+		let listView = this.props.posts.map((post) => {
+			return <Post
+						key={post['_id']}
+						postTitle={post.title}
+						postBody={post.text}
+						postAuthor={post.author}
+						dateCreated={post.createdAt}
+						isExpanded={post.expand}
+						handleExpansion={() => this.props.expansionHandler(post['_id'])}/>
+		});
+		return(
+			<div className={classname}>
+					<ReactCSSTransitionGroup
+						transitionName={pageTurn}
+						transitionEnterTimeout={300}
+						transitionLeaveTimeout={300}
+						
+		          		>
+						{listView}
+					</ReactCSSTransitionGroup>
+			</div>
+		);
+	}
 }
 
 List.propTypes = {

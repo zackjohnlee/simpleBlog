@@ -88,68 +88,6 @@ router.get('/',
 			});
 	}
 );
-// router.get('/', function(req, res, next) {
-// 	// Post.find({})
-// 	// 	.count(function(err, total){
-// 	// 		if (err) return next(err);
-// 	// 		req.body.totalPost = total;
-// 	// 	})
-// 	// 	// .count({title: "butt"}, function(err, unt){
-// 	// 	// 	if (err) return next(err);
-// 	// 	// 	req.body.unt = unt;
-// 	// 	// })
-// 	// 	.exec(function(err, count){
-// 	// 		if (err) return next(err);
-// 	// 		res.json(count);
-// 	// 	});
-// 	Post.aggregate(
-// 	[
-// 		{"$facet": 
-// 			{"posts": [
-// 				{"$group": {
-// 					"_id": null,
-// 					"totalPosts": {"$sum": 1},
-// 				}}
-// 			],
-// 			"untitled": [
-// 				{"$match": {
-// 					"title": {"$regex": "Untitled", "$options": "i"}
-// 				}},
-// 				{"$group": {
-// 					"_id": null,
-// 					"totalUntitled": {"$sum": 1},
-// 				}}
-// 			]}
-// 		}
-
-
-// 		// {"$group": {
-// 		// 	"_id": null,
-// 		// 	"title": {"$push": "$title"},
-// 		// 	"totalPosts": {"$sum": 1},
-// 		// }},
-// 		// {"$project": {
-// 		// 	"totalPosts": 1,
-// 		// 	// "titles":{
-// 		// 	// 	"$filter":{
-// 		// 	// 		"input": "$title",
-// 		// 	// 		"as": "title",
-// 		// 	// 		"cond": 
-// 		// 	// 	}
-// 		// 	// }
-// 		// }},
-// 		// //{"$unwind": "$title"}
-// 		// // {"$project":{
-// 		// // 	"title": 1,
-// 		// // 	"totalPost": 1
-// 		// }},
-		
-// 	],
-// 	function(err, results){
-// 		if (err) return next(err);
-// 		res.json(results);
-// 	});
-// });
 
 //GET array of posts from database
 router.get('/posts/:page', function(req, res, next){

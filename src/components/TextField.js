@@ -40,8 +40,8 @@ const TextField = props => {
 				handleClick={props.handleTextToggle} />
 			<ReactCSSTransitionGroup
 				transitionName="slide"
-				transitionEnterTimeout={500}
-          		transitionLeaveTimeout={500}>
+				transitionEnterTimeout={300}
+          		transitionLeaveTimeout={300}>
 				{props.isOpen &&
 					<form onSubmit={props.submitPost}>
 						<input type="text" name="title" placeholder="Entry Title..."/>

@@ -21,7 +21,8 @@ class App extends Component {
 			pendingPost: "",
 			totalPosts: 0,
 			totalUntitled: 0,
-			posts: []
+			posts: [],
+			page: 0
 		}
 
 		this.handleChange = this.handleChange.bind(this);
@@ -73,7 +74,6 @@ class App extends Component {
 	gatherPosts = (page = '0') => {
 		axios.get(`http://localhost:3100/api/posts/${page}`)
 			.then(response => {
-				console.log(response);
 				this.setState({
 					posts: response.data,
 					page: page,
@@ -121,7 +121,6 @@ class App extends Component {
 		}else if (this.state.page === 0 && dir === -1){
 			return null;
 		}else{
-			console.log("page turned");
 			let postUrl = parseInt(this.state.page + dir, 10)
 			this.gatherPosts(postUrl);
 			history.push(`/${postUrl}`);
@@ -137,6 +136,7 @@ class App extends Component {
 						path="/:page"
 						render={() =>
 							<List
+								currentPage={this.state.page}
 								name={"timeline"}
 								posts={this.state.posts}
 								expansionHandler={this.toggleExpansion}
